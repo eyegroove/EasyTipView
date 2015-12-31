@@ -43,6 +43,11 @@ $ pod install
 
 In case Xcode complains (<i>"Cannot load underlying module for EasyTipView"</i>) go to Product and choose Clean (or simply press <kbd>⇧</kbd><kbd>⌘</kbd><kbd>K</kbd>).
 
+Supported OS & SDK Versions
+-----------------------------
+
+* Supported build target - iOS 8.0 (Xcode 6.x)
+
 Usage
 --------------
 
@@ -73,11 +78,6 @@ Usage
 ```
 
 **Note that if you set the ```EasyTipView.globalPreferences```, you can ommit the ```preferences``` parameter.**
-
-Supported OS & SDK Versions
------------------------------
-
-* Supported build target - iOS 8.0 (Xcode 6.x)
 
 Custom types
 --------------
@@ -165,3 +165,13 @@ func dismissWithCompletion(completion : ((finished : Bool) -> Void)?)
 ```
 
 Use this method to programmatically hide an ``EasyTipView``.
+
+License
+--------------
+
+```EasyTipView``` is released under the MIT license. See the ```LICENSE``` file for details.
+
+Contact
+--------------
+
+You can follow or drop me a line on [my Twitter account](https://twitter.com/teodorpatras). If you find any issues on the project, you can open a ticket. Pull requests are also welcome. 
