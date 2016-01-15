@@ -35,6 +35,7 @@ public class EasyTipView: UIView {
     public enum ArrowPosition {
         case Top
         case Bottom
+        case None
     }
     
     public struct Preferences {
@@ -250,11 +251,14 @@ public class EasyTipView: UIView {
                 self.preferences.drawing.arrowPosition = .Bottom
                 frame.origin.y = refViewOrigin.y - self.contentSize.height
             }
-        }else{
+        } else if position == .Bottom {
             if CGRectGetMinY(frame) < 0 {
                 self.preferences.drawing.arrowPosition = .Top
                 frame.origin.y = refViewOrigin.y + refViewSize.height
             }
+        } else { // .None
+            self.preferences.drawing.arrowHeight = 0
+            frame.origin.y = max(0, superview.frame.height/2 - CGRectGetHeight(frame)/2)
         }
         
         var arrowTipXOrigin : CGFloat
@@ -303,7 +307,7 @@ public class EasyTipView: UIView {
         
         var method = self.drawBubbleTopShape
         
-        if arrowPosition == .Bottom {
+        if arrowPosition != .Top {
             method = self.drawBubbleBottomShape
         }
         
