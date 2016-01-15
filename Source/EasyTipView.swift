@@ -50,6 +50,7 @@ public class EasyTipView: UIView {
             public var borderWidth         = CGFloat(0)
             public var borderColor         = UIColor.clearColor()
             public var font                = UIFont.systemFontOfSize(15)
+            public var kerning             = CGFloat(0)
         }
         
         public struct Positioning {
@@ -100,7 +101,7 @@ public class EasyTipView: UIView {
         
         [unowned self] in
         
-        var attributes : [String : AnyObject] = [NSFontAttributeName : self.preferences.drawing.font]
+        var attributes : [String : AnyObject] = [NSFontAttributeName : self.preferences.drawing.font, NSKernAttributeName : self.preferences.drawing.kerning]
         
         var textSize = self.text.boundingRectWithSize(CGSizeMake(self.preferences.positioning.maxWidth, CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil).size
         
@@ -356,7 +357,7 @@ public class EasyTipView: UIView {
         let textRect = CGRectMake(bubbleFrame.origin.x + (bubbleFrame.size.width - self.textSize.width) / 2, bubbleFrame.origin.y + (bubbleFrame.size.height - self.textSize.height) / 2, textSize.width, textSize.height)
         
         
-        self.text.drawInRect(textRect, withAttributes: [NSFontAttributeName : self.preferences.drawing.font, NSForegroundColorAttributeName : self.preferences.drawing.foregroundColor, NSParagraphStyleAttributeName : paragraphStyle])
+        self.text.drawInRect(textRect, withAttributes: [NSFontAttributeName : self.preferences.drawing.font, NSForegroundColorAttributeName : self.preferences.drawing.foregroundColor, NSParagraphStyleAttributeName : paragraphStyle, NSKernAttributeName : self.preferences.drawing.kerning])
     }
     
     override public func drawRect(rect: CGRect) {
