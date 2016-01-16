@@ -52,6 +52,7 @@ public class EasyTipView: UIView {
             public var borderColor         = UIColor.clearColor()
             public var font                = UIFont.systemFontOfSize(15)
             public var kerning             = CGFloat(0)
+            public var semicircleBorders   = Bool(false)
         }
         
         public struct Positioning {
@@ -298,7 +299,7 @@ public class EasyTipView: UIView {
         
         let arrowWidth = self.preferences.drawing.arrowWidth
         let arrowHeight = self.preferences.drawing.arrowHeight
-        let cornerRadius = self.preferences.drawing.cornerRadius
+        let cornerRadius = self.preferences.drawing.semicircleBorders ? bubbleFrame.size.height/2 : self.preferences.drawing.cornerRadius
         
         let contourPath = CGPathCreateMutable()
         
