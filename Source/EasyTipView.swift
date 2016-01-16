@@ -61,6 +61,7 @@ public class EasyTipView: UIView {
             public var textHInset           = CGFloat(10)
             public var textVInset           = CGFloat(10)
             public var maxWidth             = CGFloat(200)
+            public var textVOffset          = CGFloat(0)
         }
         
         public var drawing      = Drawing()
@@ -359,7 +360,7 @@ public class EasyTipView: UIView {
         paragraphStyle.lineBreakMode = NSLineBreakMode.ByWordWrapping
         
         
-        let textRect = CGRectMake(bubbleFrame.origin.x + (bubbleFrame.size.width - self.textSize.width) / 2, bubbleFrame.origin.y + (bubbleFrame.size.height - self.textSize.height) / 2, textSize.width, textSize.height)
+        let textRect = CGRectMake(bubbleFrame.origin.x + (bubbleFrame.size.width - self.textSize.width) / 2, bubbleFrame.origin.y + (bubbleFrame.size.height - self.textSize.height) / 2 + self.preferences.positioning.textVOffset, textSize.width, textSize.height + self.preferences.positioning.textVOffset)
         
         
         self.text.drawInRect(textRect, withAttributes: [NSFontAttributeName : self.preferences.drawing.font, NSForegroundColorAttributeName : self.preferences.drawing.foregroundColor, NSParagraphStyleAttributeName : paragraphStyle, NSKernAttributeName : self.preferences.drawing.kerning])
