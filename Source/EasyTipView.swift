@@ -121,9 +121,9 @@ public class EasyTipView: UIView {
     private lazy var contentSize : CGSize = {
         
         [unowned self] in
-        
-        var contentSize = CGSizeMake(self.textSize.width + self.preferences.positioning.textHInset * 2 + self.preferences.positioning.bubbleHInset * 2, self.textSize.height + self.preferences.positioning.textVInset * 2 + self.preferences.positioning.bubbleVInset * 2 + self.preferences.drawing.arrowHeight)
-        
+
+        var contentSize = CGSizeMake(self.textSize.width + self.preferences.positioning.textHInset * 2 + self.preferences.positioning.bubbleHInset * 2, self.textSize.height + self.preferences.positioning.textVInset * 2 + max(0, self.preferences.positioning.bubbleVInset * 2) + self.preferences.drawing.arrowHeight)
+
         return contentSize
     }()
     
@@ -253,11 +253,13 @@ public class EasyTipView: UIView {
                 self.preferences.drawing.arrowPosition = .Bottom
                 frame.origin.y = refViewOrigin.y - self.contentSize.height
             }
+            frame.origin.y += min(0, self.preferences.positioning.bubbleVInset)
         } else if position == .Bottom {
             if CGRectGetMinY(frame) < 0 {
                 self.preferences.drawing.arrowPosition = .Top
                 frame.origin.y = refViewOrigin.y + refViewSize.height
             }
+            frame.origin.y -= min(0, self.preferences.positioning.bubbleVInset)
         } else { // .None
             self.preferences.drawing.arrowHeight = 0
             frame.origin.y = max(0, refViewCenter.y - CGRectGetHeight(frame)/2)
@@ -270,8 +272,8 @@ public class EasyTipView: UIView {
         } else {
             arrowTipXOrigin = abs(frame.origin.x - refViewOrigin.x) + refViewSize.width / 2
         }
-        
-        self.arrowTip = CGPointMake(arrowTipXOrigin, self.preferences.drawing.arrowPosition == .Top ? self.preferences.positioning.bubbleVInset : self.contentSize.height - self.preferences.positioning.bubbleVInset)
+
+        self.arrowTip = CGPointMake(arrowTipXOrigin, self.preferences.drawing.arrowPosition == .Top ? max(0, self.preferences.positioning.bubbleVInset) : self.contentSize.height - max(0, self.preferences.positioning.bubbleVInset))
         self.frame = frame
     }
     
@@ -370,9 +372,9 @@ public class EasyTipView: UIView {
         
         let arrowPosition = self.preferences.drawing.arrowPosition
         let bubbleWidth = self.contentSize.width - 2 * self.preferences.positioning.bubbleHInset
-        let bubbleHeight = self.contentSize.height - 2 * self.preferences.positioning.bubbleVInset - self.preferences.drawing.arrowHeight
+        let bubbleHeight = self.contentSize.height - max(0, 2 * self.preferences.positioning.bubbleVInset) - self.preferences.drawing.arrowHeight
         let bubbleXOrigin = self.preferences.positioning.bubbleHInset
-        let bubbleYOrigin = arrowPosition == .Bottom ? self.preferences.positioning.bubbleVInset : self.preferences.positioning.bubbleVInset + self.preferences.drawing.arrowHeight
+        let bubbleYOrigin = (arrowPosition == .Bottom ? (max(0, self.preferences.positioning.bubbleVInset)) : (max(0, self.preferences.positioning.bubbleVInset) + self.preferences.drawing.arrowHeight))
         let bubbleFrame = CGRectMake(bubbleXOrigin, bubbleYOrigin, bubbleWidth, bubbleHeight)
         
         let context = UIGraphicsGetCurrentContext()!
