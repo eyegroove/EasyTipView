@@ -260,7 +260,7 @@ public class EasyTipView: UIView {
             }
         } else { // .None
             self.preferences.drawing.arrowHeight = 0
-            frame.origin.y = max(0, superview.frame.height/2 - CGRectGetHeight(frame)/2)
+            frame.origin.y = max(0, refViewCenter.y - CGRectGetHeight(frame)/2)
         }
         
         var arrowTipXOrigin : CGFloat
