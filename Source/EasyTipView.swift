@@ -362,7 +362,7 @@ public class EasyTipView: UIView {
         paragraphStyle.lineBreakMode = NSLineBreakMode.ByWordWrapping
         
         
-        let textRect = CGRectMake(bubbleFrame.origin.x + (bubbleFrame.size.width - self.textSize.width) / 2, bubbleFrame.origin.y + (bubbleFrame.size.height - self.textSize.height) / 2 + self.preferences.positioning.textVOffset, textSize.width, textSize.height + self.preferences.positioning.textVOffset)
+        let textRect = CGRectMake(bubbleFrame.origin.x + (bubbleFrame.size.width - self.textSize.width) / 2, bubbleFrame.origin.y + (bubbleFrame.size.height - self.textSize.height) / 2 + self.preferences.positioning.textVOffset, textSize.width, textSize.height)
         
         
         self.text.drawInRect(textRect, withAttributes: [NSFontAttributeName : self.preferences.drawing.font, NSForegroundColorAttributeName : self.preferences.drawing.foregroundColor, NSParagraphStyleAttributeName : paragraphStyle, NSKernAttributeName : self.preferences.drawing.kerning])
