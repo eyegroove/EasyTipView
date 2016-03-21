@@ -87,7 +87,7 @@ public class EasyTipView: UIView {
     
     override public var description : String {
         
-        let type = _stdlib_getDemangledTypeName(self).componentsSeparatedByString(".").last!
+        let type = String(self.dynamicType)
         
         return "<< \(type) with text : '\(self.text)' >>"
     }
